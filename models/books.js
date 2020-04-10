@@ -16,5 +16,3 @@ class Books {
 }
 
 module.exports = new Books();
-// const test = new Books()
-// test.addBook('test', 'URL TEST', 1)

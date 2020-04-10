@@ -3,20 +3,19 @@ const router = express.Router();
 
 const Books = require("../models/books");
 
-router.get("/api/book", (req, res) => {
+router.get("/api/books", (req, res) => {
     Books.selectAll()
     .then(results => res.json(results))
     .catch(error => res.json(error))
 })
 
-router.get("/api/book/:name", (req, res) => {
+router.get("/api/books/:name", (req, res) => {
     const bookTitle = req.params.name;
     Books.getOneBook(bookTitle)
     .then(results => res.json(results))
     .catch(error => res.json(error))
 })
 
-// cant determine if this route is working in Postman
 router.post('/api/book/new', (req, res) => {
     const { title, coverPhoto, authorId } = req.body;
 
