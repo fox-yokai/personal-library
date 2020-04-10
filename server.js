@@ -14,11 +14,11 @@ app.use(express.json());
 // Import routes and give the server access to them.
 const apiBooksRoutes = require("./controllers/booksController");
 // const apiNotesRoutes = require("./controllers/notesController");
-// const htmlRoutes = require("./controllers/htmlController.js");
+const htmlRoutes = require("./controllers/htmlController.js");
 
 app.use(apiBooksRoutes);
 // app.use(apiNotesRoutes);
-// app.use(htmlRoutes);
+app.use(htmlRoutes);
 
 app.listen(PORT, function() {
   console.log("App now listening at localhost:" + PORT);

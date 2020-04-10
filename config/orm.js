@@ -7,7 +7,7 @@ class ORM  {
   printQuestionMarks(numberOfValues){
     const questionMarks = [];
     for (var i = 0; i < numberOfValues; i++) {
-      questionMarks.push("??");
+      questionMarks.push("?");
     }
     return questionMarks.join(', ');
   }
@@ -18,9 +18,10 @@ class ORM  {
   }
 
 
-  getSingle(table, columns, value){
-      const queryString = "SELECT * FROM ?? WHERE ?? = ?"
-      return this.connection.query(queryString, [table, columns, value])
+  innerJoinWhere(colsToSelect, tableOne, tableTwo, tableOneCol, tableTwoCol, tableTwoColTwo, bookTitle){
+     // 'SELECT books.id, firstName, lastName, title, coverPhoto FROM authors INNER JOIN books ON authors.id = books.authorId WHERE books.title=?', [bookTitle] 
+     const queryString = `SELECT ${this.printQuestionMarks(colsToSelect.length)} FROM ?? INNER JOIN ?? ON ??.?? = ??.?? WHERE ??.??=?`;
+     return this.connection.query(queryString, [...colsToSelect, tableOne, tableTwo, tableOne, tableOneCol, tableTwo, tableTwoCol, tableTwo, tableTwoColTwo, bookTitle])
 
   }
 
@@ -31,6 +32,7 @@ class ORM  {
     console.log(queryString);
     return this.connection.query(queryString, [table, ...values]) 
   }
+
 
   update(table, objColVals, id) {
     var queryString = `UPDATE ?? SET ? WHERE ?`;
